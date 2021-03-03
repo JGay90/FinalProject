@@ -1,0 +1,37 @@
+03-03-2021 10:48:15 {INFO} [com.revature.services.UserService] - Program found user in Database
+03-03-2021 10:51:13 {INFO} [com.revature.services.UserService] - Program found user in Database
+03-03-2021 10:51:18 {INFO} [com.revature.services.UserService] - Program found user in Database
+03-03-2021 10:51:28 {INFO} [com.revature.services.UserService] - Program added a transaction to Database
+03-03-2021 10:51:28 {INFO} [com.revature.services.UserService] - Program updated an Account to Database
+03-03-2021 10:52:01 {INFO} [com.revature.services.UserService] - Program found user in Database
+03-03-2021 10:52:52 {INFO} [com.revature.services.UserService] - Program found user in Database
+03-03-2021 10:55:01 {INFO} [com.revature.services.UserService] - Program found user in Database
+03-03-2021 10:57:55 {INFO} [com.revature.services.UserService] - Program found user in Database
+03-03-2021 10:57:59 {INFO} [com.revature.services.UserService] - Program found user in Database
+03-03-2021 10:58:09 {INFO} [com.revature.services.UserService] - Program added a transaction to Database
+03-03-2021 10:58:09 {INFO} [com.revature.services.UserService] - Program updated an Account to Database
+03-03-2021 10:58:09 {INFO} [com.revature.ui.UserMenu] - User made the choice of 6and made a deposit
+03-03-2021 10:58:14 {INFO} [com.revature.services.UserService] - Program found user in Database
+03-03-2021 10:58:22 {INFO} [com.revature.services.UserService] - Program added a transaction to Database
+03-03-2021 10:58:22 {INFO} [com.revature.services.UserService] - Program updated an Account to Database
+03-03-2021 10:58:22 {INFO} [com.revature.ui.UserMenu] - User made the choice of 5and made a withdrawl
+03-03-2021 11:02:02 {INFO} [com.revature.services.UserService] - Program found user in Database
+03-03-2021 11:02:13 {INFO} [com.revature.services.UserService] - Program found user in Database
+03-03-2021 11:02:29 {INFO} [com.revature.services.UserService] - Program added a transaction to Database
+03-03-2021 11:02:29 {INFO} [com.revature.services.UserService] - Program updated an Account to Database
+03-03-2021 11:02:29 {INFO} [com.revature.ui.UserMenu] - User made the choice of 6and made a deposit
+03-03-2021 11:02:41 {INFO} [com.revature.services.UserService] - Program found user in Database
+03-03-2021 11:02:49 {INFO} [com.revature.services.UserService] - Program added a transaction to Database
+03-03-2021 11:02:49 {INFO} [com.revature.services.UserService] - Program updated an Account to Database
+03-03-2021 11:02:49 {INFO} [com.revature.ui.UserMenu] - User made the choice of 5and made a withdrawl
+03-03-2021 11:03:01 {INFO} [com.revature.ui.MainMenu] - User made the choice of 2and logged into the User Menu
+03-03-2021 11:03:30 {INFO} [com.revature.ui.NeedingApprovalMenu] - Employee made the choice of 2and retrieved the approval list
+03-03-2021 11:03:42 {INFO} [com.revature.ui.MainMenu] - User made the choice of 4and logged into the Employee Menu
+03-03-2021 11:07:05 {INFO} [com.revature.ui.NeedingApprovalMenu] - Employee made the choice of 2and retrieved the approval list
+03-03-2021 11:07:14 {INFO} [com.revature.ui.NeedingApprovalMenu] - Employee made the choice of 4and approved the account
+03-03-2021 11:07:25 {INFO} [com.revature.ui.EmployeeMenu] - Employee made the choice of 2and went to  the accounts needing approval
+03-03-2021 11:07:26 {INFO} [com.revature.ui.MainMenu] - User made the choice of 4and logged into the Employee Menu
+03-03-2021 12:15:22 {WARN} [com.revature.exceptions.UserNotFoundException] - Program tried to find a User but Username was not found in Database
+03-03-2021 12:15:22 {WARN} [com.revature.exceptions.UserNotFoundException] - Program tried to find a User but Username was not found in Database
+03-03-2021 13:18:31 {INFO} [com.revature.services.UserService] - Program found user in Database
+03-03-2021 13:18:57 {INFO} [com.revature.ui.MainMenu] - User made the choice of 2and logged into the User Menu
