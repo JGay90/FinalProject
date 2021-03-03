@@ -92,187 +92,6 @@ public class UserMenu implements Menu {
 		} while(choice != 1);
 	}
 	
-	private void selectDeposit() throws SQLException {
-		accts = udao.getAcctByUser(un);
-		user.setAccounts(accts);
-		user.setUsername(un);
-		if(user.getAccounts().size()>1)
-		{
-			System.out.println("Which Account would you like to View: ");
-			try {
-				user = userService.getUserByUsername(un);
-			} catch (UserNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			user.setAccounts(udao.getAcctByUserwithBalance(un));
-			System.out.println(user.getAccounts().toString());
-			i = getAcctNum();
-			
-			userService.getName(un,user);
-			trans.setTransaction(getDeposit(i));
-			date= LocalDate.now();
-			adate = date.format(DateTimeFormatter.ofPattern("MMM-dd-yy"));
-			trans.setDot(adate);
-			trans.setAcctNum(i);
-			System.out.println(trans.getContent());
-			transacts.add(trans);
-			user.setTransactions(transacts);
-			a.setAcctNum(i);
-			a.setDeposit(trans.getAmount());
-			int x= 0;
-			while (x < accts.size())
-			{
-				if(a.getAcctBal() == accts.get(x).getAcctBal())
-				{
-					a.setAcctBal(accts.get(x).getAcctBal());
-				}
-				else {
-					x++;
-				}
-			}
-			
-			//userService.getAccountNum(un, a);
-			try {
-				a.updateBalanceD(a.getAcctBal(),a.getDeposit());
-				a.getAcctBal();
-			} catch (IllegalDepositException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				log.warn("User made the choice of " + choice + "and put in an illegal deposit");
-			}
-			userService.addToDB(trans, user, a);
-			userService.addUpdateDB(a, un);
-		}else {
-		user.setUsername(un);
-		userService.getName(un,user);
-		trans.setTransaction(getDeposit());
-		date= LocalDate.now();
-		adate = date.format(DateTimeFormatter.ofPattern("MMM-dd-yy"));
-		trans.setDot(adate);
-		System.out.println(trans.getContent());
-		transacts.add(trans);
-		user.setTransactions(transacts);
-		userService.getAccountNum(un, a);
-		a.setDeposit(trans.getAmount());
-		int x= 0;
-		while (x < accts.size())
-		{
-			if(a.getAcctBal() == accts.get(x).getAcctBal())
-			{
-				a.setAcctBal(accts.get(x).getAcctBal());
-			}
-			else {
-				x++;
-			}
-		}
-		
-		//userService.getAccountNum(un, a);
-		try {
-			a.updateBalanceD(a.getAcctBal(),a.getDeposit());
-			a.getAcctBal();
-		} catch (IllegalDepositException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		userService.addToDB(trans, user, a);
-		userService.addUpdateDB(a, un);
-			}
-		log.info("User made the choice of " + choice + "and made a deposit");
-	}
-	private void selectCheckAccounts() {
-		try {
-			User user = userService.getUserByUsername(un);
-			accts = udao.getAcctByUserwithBalance(un);
-			user.setAccounts(accts);
-			for(z= 0; z < user.getAccounts().size(); z++)
-			{
-				printAcctBals();
-			}
-			
-			
-		} catch (SQLException | UserNotFoundException e) {
-			System.out.println(e.getClass().getSimpleName() + " " + e.getMessage());
-		}
-		
-	}
-
-	private void selectWithdrawls() throws SQLException {
-		accts = udao.getAcctByUser(un);
-		user.setAccounts(accts);
-		
-		if(user.getAccounts().size()>1)
-		{
-			System.out.println("Which Account would you like to View: ");
-			try {
-				user = userService.getUserByUsername(un);
-			} catch (UserNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			user.setAccounts(udao.getAcctByUserwithBalance(un));
-			System.out.println(user.getAccounts().toString());
-			i = getAcctNum();
-			
-			trans.setTransaction(getWithdrawl());
-			date= LocalDate.now();
-			adate = date.format(DateTimeFormatter.ofPattern("MMM-dd-yy"));
-			trans.setDot(adate);
-			//System.out.println(trans.getDot());
-		//	System.out.println(trans.getContent());
-			trans.setAcctNum(i);
-			transacts.add(trans);
-			a.setAcctNum(i);
-			int x= 0;
-			while (x < accts.size())
-			{
-				if(a.getAcctBal() == accts.get(x).getAcctBal())
-				{
-					a.setAcctBal(accts.get(x).getAcctBal());
-				}
-				else {
-					x++;
-				}
-			}
-			try {
-				a.updateBalanceW(trans.getAmount(), a.getAcctBal());
-				a.getAcctBal();
-				} catch (IllegalWithdrawlException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				log.warn("User made the choice of " + choice + "and put in an illegal withdrawl");
-			}
-			user.setTransactions(transacts);
-			user.getTransactions();
-			userService.addToDB(trans,user, a);
-			userService.addUpdateDB(a, un);
-		}
-		else {
-			user.setUsername(un);
-			userService.getName(un,user);
-			trans.setTransaction(getWithdrawl());
-			date= LocalDate.now();
-			adate = date.format(DateTimeFormatter.ofPattern("MMM-dd-yy"));
-			trans.setDot(adate);
-			//System.out.println(trans.getDot());
-			//System.out.println(trans.getContent());
-			transacts.add(trans);
-			user.setTransactions(transacts);
-			user.getTransactions();
-			userService.getAccountNum(un, a);
-			userService.addToDB(trans, user, a);
-			userService.addUpdateDB(a, un);
-		}
-		log.info("User made the choice of " + choice + "and made a withdrawl");
-		
-	}
 
 	private String getUsernameInput() {
 		System.out.println("Enter a username that you would like to lookup: ");
@@ -364,4 +183,186 @@ public void selectTransHistory() {
 	}
 	log.info("User made the choice of " + choice + "and recieved their Transaction history");
 }
+	public void selectDeposit() throws SQLException {
+	accts = udao.getAcctByUser(un);
+	user.setAccounts(accts);
+	user.setUsername(un);
+	if(user.getAccounts().size()>1)
+	{
+		System.out.println("Which Account would you like to View: ");
+		try {
+			user = userService.getUserByUsername(un);
+		} catch (UserNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		user.setAccounts(udao.getAcctByUserwithBalance(un));
+		System.out.println(user.getAccounts().toString());
+		i = getAcctNum();
+		
+		userService.getName(un,user);
+		trans.setTransaction(getDeposit(i));
+		date= LocalDate.now();
+		adate = date.format(DateTimeFormatter.ofPattern("MMM-dd-yy"));
+		trans.setDot(adate);
+		trans.setAcctNum(i);
+		System.out.println(trans.getContent());
+		transacts.add(trans);
+		user.setTransactions(transacts);
+		a.setAcctNum(i);
+		a.setDeposit(trans.getAmount());
+		int x= 0;
+		while (x < accts.size())
+		{
+			if(a.getAcctBal() == accts.get(x).getAcctBal())
+			{
+				a.setAcctBal(accts.get(x).getAcctBal());
+			}
+			else {
+				x++;
+			}
+		}
+		
+		//userService.getAccountNum(un, a);
+		try {
+			a.updateBalanceD(a.getAcctBal(),a.getDeposit());
+			a.getAcctBal();
+		} catch (IllegalDepositException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			log.warn("User made the choice of " + choice + "and put in an illegal deposit");
+		}
+		userService.addToDB(trans, user, a);
+		userService.addUpdateDB(a, un);
+	}else {
+	user.setUsername(un);
+	userService.getName(un,user);
+	trans.setTransaction(getDeposit());
+	date= LocalDate.now();
+	adate = date.format(DateTimeFormatter.ofPattern("MMM-dd-yy"));
+	trans.setDot(adate);
+	System.out.println(trans.getContent());
+	transacts.add(trans);
+	user.setTransactions(transacts);
+	userService.getAccountNum(un, a);
+	a.setDeposit(trans.getAmount());
+	int x= 0;
+	while (x < accts.size())
+	{
+		if(a.getAcctBal() == accts.get(x).getAcctBal())
+		{
+			a.setAcctBal(accts.get(x).getAcctBal());
+		}
+		else {
+			x++;
+		}
+	}
+	
+	//userService.getAccountNum(un, a);
+	try {
+		a.updateBalanceD(a.getAcctBal(),a.getDeposit());
+		a.getAcctBal();
+	} catch (IllegalDepositException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	userService.addToDB(trans, user, a);
+	userService.addUpdateDB(a, un);
+		}
+	log.info("User made the choice of " + choice + "and made a deposit");
 }
+public void selectCheckAccounts() {
+	try {
+		User user = userService.getUserByUsername(un);
+		accts = udao.getAcctByUserwithBalance(un);
+		user.setAccounts(accts);
+		for(z= 0; z < user.getAccounts().size(); z++)
+		{
+			printAcctBals();
+		}
+		
+		
+	} catch (SQLException | UserNotFoundException e) {
+		System.out.println(e.getClass().getSimpleName() + " " + e.getMessage());
+	}
+	
+}
+
+public void selectWithdrawls() throws SQLException {
+	accts = udao.getAcctByUser(un);
+	user.setAccounts(accts);
+	
+	if(user.getAccounts().size()>1)
+	{
+		System.out.println("Which Account would you like to View: ");
+		try {
+			user = userService.getUserByUsername(un);
+		} catch (UserNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		user.setAccounts(udao.getAcctByUserwithBalance(un));
+		System.out.println(user.getAccounts().toString());
+		i = getAcctNum();
+		
+		trans.setTransaction(getWithdrawl());
+		date= LocalDate.now();
+		adate = date.format(DateTimeFormatter.ofPattern("MMM-dd-yy"));
+		trans.setDot(adate);
+		//System.out.println(trans.getDot());
+	//	System.out.println(trans.getContent());
+		trans.setAcctNum(i);
+		transacts.add(trans);
+		a.setAcctNum(i);
+		int x= 0;
+		while (x < accts.size())
+		{
+			if(a.getAcctBal() == accts.get(x).getAcctBal())
+			{
+				a.setAcctBal(accts.get(x).getAcctBal());
+			}
+			else {
+				x++;
+			}
+		}
+		try {
+			a.updateBalanceW(trans.getAmount(), a.getAcctBal());
+			a.getAcctBal();
+			} catch (IllegalWithdrawlException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			log.warn("User made the choice of " + choice + "and put in an illegal withdrawl");
+		}
+		user.setTransactions(transacts);
+		user.getTransactions();
+		userService.addToDB(trans,user, a);
+		userService.addUpdateDB(a, un);
+	}
+	else {
+		user.setUsername(un);
+		userService.getName(un,user);
+		trans.setTransaction(getWithdrawl());
+		date= LocalDate.now();
+		adate = date.format(DateTimeFormatter.ofPattern("MMM-dd-yy"));
+		trans.setDot(adate);
+		//System.out.println(trans.getDot());
+		//System.out.println(trans.getContent());
+		transacts.add(trans);
+		user.setTransactions(transacts);
+		user.getTransactions();
+		userService.getAccountNum(un, a);
+		userService.addToDB(trans, user, a);
+		userService.addUpdateDB(a, un);
+	}
+	log.info("User made the choice of " + choice + "and made a withdrawl");
+	
+}
+}
+

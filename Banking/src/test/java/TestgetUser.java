@@ -27,7 +27,7 @@ import com.revature.util.ConnectionUtil;
 public class TestgetUser {
 	
 	public static usersDAO userDAO;
-	public static UserService userServ;
+	public static UserService mockUServ;
 	public static Connection mockConnection;
 	public static MockedStatic<ConnectionUtil> mockedStatic;
 	
@@ -35,6 +35,7 @@ public class TestgetUser {
 	public static void setUpBeforeClass() throws Exception {
 		userDAO = mock(usersDAO.class);
 		mockConnection = mock(Connection.class);
+		mockUServ = mock(UserService.class);
 		when(userDAO.getUserByName(eq("abc123"), eq(mockConnection))).thenReturn(new User("Jane", "Doe","abc123","apassword"));
 		
 	}
@@ -46,7 +47,7 @@ public class TestgetUser {
 
 	@Before
 	public void setUp() throws Exception {
-	userServ = new UserService();
+	
 	}
 
 	@After
@@ -59,7 +60,7 @@ public class TestgetUser {
 			
 			mockedStatic.when(ConnectionUtil::getConnection).thenReturn(mockConnection);
 			
-			User actual = userServ.getUserByUsername("abc123");
+			User actual = userDAO.getUserByName("abc123",mockConnection);
 			
 			User expected = new User("Jane", "Doe","abc123","apassword");
 		
@@ -72,7 +73,7 @@ public class TestgetUser {
 	public void testInvalidUserName() throws UserNotFoundException, SQLException {
 		try (MockedStatic<ConnectionUtil> mockedStatic = Mockito.mockStatic(ConnectionUtil.class)) {
 			mockedStatic.when(ConnectionUtil::getConnection).thenReturn(mockConnection);
-			User actual = userServ.getUserByUsername("abc1234");
+			User actual = mockUServ.getUserByUsername("abc1234");
 		}
 
 }

@@ -12,11 +12,12 @@ public class MainMenu implements Menu {
 	String un;
 	String pw;
 	Connection con;
+	int choice;
 	private static Logger log = Logger.getLogger(MainMenu.class);
 	public void display() throws SQLException {
 		System.out.println("Welcome to the application!");
 		
-		int choice = 0;
+		choice = 0;
 		
 		do {
 			System.out.println("=== MAIN MENU ===");
@@ -35,51 +36,60 @@ public class MainMenu implements Menu {
 				case 1:
 					break;
 				case 2:
-					un = getUsername();
-					Menu userMenu = new UserMenu(un);
-					pw = getPassword();
-					 con = ConnectionUtil.getConnection();
-					
-					if(udao.logIn(un, pw, con)!=true)
-					{
-						System.out.println("Input not valid");
-						log.warn("User made the choice of " + choice + "and failed to log in");
-					}
-					else {
-					userMenu.display();
-					log.info("User made the choice of " + choice + "and logged into the User Menu");
-					}
+				selectUserMenu();
 					break;
 				
 				  case 3:
-					  Menu newUserMenu = new NewUserMenu();
-					  newUserMenu.display(); 
-					  log.info("User made the choice of " + choice + "They went into the new user menu");
+					 selectNewMenu();
 					  break;
 				  case 4:
-					  Menu employeeMenu = new EmployeeMenu();
-					   un = getUsername();
-					   pw = getPassword();
-					   con = ConnectionUtil.getConnection();
-						
-						if(udao.employeelogIn(un, pw, con)!=true)
-						{
-							System.out.println("Input not valid");
-							log.warn("User made the choice of " + choice + "and failed to log in");
-						}
-						else {
-					  employeeMenu.display();
-					  log.info("User made the choice of " + choice + "and logged into the Employee Menu");
-					  
+					 selectEmployeeMenu();
 					  break;
-						}
 				 
 				default:
 					System.out.println("No valid choice entered, please try again");
 			}
 			
 		} while(choice != 1);
+}
+	
+	public void selectEmployeeMenu() throws SQLException {
+		 Menu employeeMenu = new EmployeeMenu();
+		   un = getUsername();
+		   pw = getPassword();
+		   con = ConnectionUtil.getConnection();
+			
+			if(udao.employeelogIn(un, pw, con)!=true)
+			{
+				System.out.println("Input not valid");
+				log.warn("User made the choice of " + choice + "and failed to log in");
+			}
+			else {
+		  employeeMenu.display();
+		  log.info("User made the choice of " + choice + "and logged into the Employee Menu");
+			}
+	}
+	public void selectNewMenu() throws SQLException
+	{
+		 Menu newUserMenu = new NewUserMenu();
+		  newUserMenu.display(); 
+		  log.info("User made the choice of " + choice + "They went into the new user menu");
+	}
+	public void selectUserMenu() throws SQLException {
+		un = getUsername();
+		Menu userMenu = new UserMenu(un);
+		pw = getPassword();
+		 con = ConnectionUtil.getConnection();
 		
+		if(udao.logIn(un, pw, con)!=true)
+		{
+			System.out.println("Input not valid");
+			log.warn("User made the choice of " + choice + "and failed to log in");
+		}
+		else {
+		userMenu.display();
+		log.info("User made the choice of " + choice + "and logged into the User Menu");
+		}
 	}
 	private String getUsername() {
 		System.out.println("Enter your Username: ");

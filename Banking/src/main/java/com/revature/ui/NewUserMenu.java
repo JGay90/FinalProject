@@ -73,7 +73,7 @@ public class NewUserMenu implements Menu {
 			
 		} while(choice != 1);
 	}
-	private void selectNewBoth() throws SQLException
+	public void selectNewBoth() throws SQLException
 	{
 		String username = getUsernameInput();
 		String firstName = getUserFirstName();
@@ -91,7 +91,7 @@ public class NewUserMenu implements Menu {
 		uServe.addToDB(newacct,newUser.getUsername());
 		log.info("User made the choice of " + choice + "and made a new user login and Bank account");
 	}
-	private void selectNewBankAcct() throws SQLException {
+	public void selectNewBankAcct() throws SQLException {
 		String un = getAUsernameInput();
 		double bal = Double.parseDouble(getStartingDeposit());
 		Account newacct = new Account();
@@ -112,7 +112,7 @@ public class NewUserMenu implements Menu {
 		uServe.addToDB(trans, newacct);
 		log.info("User made the choice of " + choice + "and made a new Bank account");
 	}
-	private void  selectNewUserAcct() throws SQLException
+	public void  selectNewUserAcct() throws SQLException
 	{
 		String username = getUsernameInput();
 		String firstName = getUserFirstName();
