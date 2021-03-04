@@ -75,10 +75,6 @@ public class AccountApproval implements Menu {
 
 		return input;
 	}
-	@Override
-	public void display(String un) throws SQLException {
-		// TODO Auto-generated method stub
-		
-	}
+
 	
 	}

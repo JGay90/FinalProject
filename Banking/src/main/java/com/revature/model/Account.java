@@ -137,7 +137,38 @@ public class Account {
 		
 	}
 	
+	public void updateBalanceZW(double w, double b) throws IllegalWithdrawlException {
+		double bal = b;
+		double with = w;
+		if(with > 0) {
+		bal -=with;
+		if(bal >= 0)
+		{
+		setAcctBal(bal);
+		System.out.println("New balance is: "+ getAcctBal());
+		}
+		else
+		{
+			throw new  IllegalWithdrawlException("Insufficent Funds");
+		}
+		}
+		
+	}
+	
 	public void updateBalanceD(double b,double d) throws IllegalDepositException {
+		double bal = b;
+		double depos =d;
+		if(depos > 0) {
+		bal += depos;
+		setAcctBal(bal);
+		System.out.println("New balance is: "+ getAcctBal());
+		}
+		else
+		{
+			throw new IllegalDepositException("Deposits Must be positive");
+		}
+	}
+	public void updateBalance(double b,double d) throws IllegalDepositException {
 		double bal = b;
 		double depos =d;
 		if(depos > 0) {

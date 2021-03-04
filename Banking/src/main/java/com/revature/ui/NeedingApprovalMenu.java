@@ -105,9 +105,5 @@ public class NeedingApprovalMenu implements Menu {
 
 	}
 
-	@Override
-	public void display(String un) throws SQLException {
-		// TODO Auto-generated method stub
-		
-	}
+	
 }

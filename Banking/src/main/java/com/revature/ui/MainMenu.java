@@ -103,10 +103,5 @@ public class MainMenu implements Menu {
 		
 		return input;
 	}
-	@Override
-	public void display(String un) throws SQLException {
-		// TODO Auto-generated method stub
-		
-	}
 	
 }

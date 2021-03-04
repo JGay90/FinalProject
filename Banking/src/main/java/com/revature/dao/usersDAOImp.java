@@ -191,5 +191,26 @@ public class usersDAOImp implements usersDAO {
 			
 		return wasFound;
 	}
+	public List<Transaction> gettransactions() throws SQLException{
+		List<Transaction>trans = new ArrayList<Transaction>();
+		Connection con = ConnectionUtil.getConnection();
+		Transaction t;
+		
+		String sql = "SELECT * FROM \"Banking\".transaction";
+		PreparedStatement pstmt = con.prepareStatement(sql);
+		ResultSet rs = pstmt.executeQuery();
+		
+		while (rs.next()) {
+			t = new Transaction();
+			t.setTransaction(rs.getString("transaction_type"));
+			t.setDot(rs.getString("date of transaction"));
+			t.setAcctNum(rs.getInt("accountnumber"));
+			trans.add(t);
+		
+		}
+		
+		return trans;
+		
+	}
 }
 	

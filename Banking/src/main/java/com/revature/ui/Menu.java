@@ -12,6 +12,5 @@ public interface Menu {
 	
 	void display() throws SQLException; //abstract display method
 	
-	void display(String un) throws SQLException;
 	
 }

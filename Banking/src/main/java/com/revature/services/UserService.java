@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import com.revature.dao.usersDAO;
 import com.revature.dao.usersDAOImp;
 import com.revature.exceptions.AccountNotFoundException;
+import com.revature.exceptions.IllegalWithdrawlException;
 import com.revature.exceptions.UserNotFoundException;
 import com.revature.model.Account;
 import com.revature.model.Transaction;
@@ -179,6 +180,23 @@ public class UserService {
 	//	a.setAcctNum();
 		return a;
 	}
+	public Account getAccountBak(int acctnum, Account a) throws SQLException {
+		Connection con = ConnectionUtil.getConnection();
+		
+		String sql = "Select balance from \"Banking\".accounts where accountnumber = ? and approved = true";
+		PreparedStatement myStmt = con.prepareStatement(sql);
+		
+		myStmt.setInt(1, acctnum);
+		ResultSet rs = myStmt.executeQuery();
+		while(rs.next())
+		{
+			a.setAcctBal(rs.getDouble("balance"));
+			
+		}
+		//System.out.println(rs);
+	//	a.setAcctNum();
+		return a;
+	}
 
 	public void addToDB(Account a,String un) throws SQLException {
 Connection con = ConnectionUtil.getConnection();
@@ -212,7 +230,20 @@ Connection con = ConnectionUtil.getConnection();
 		 log.info("Program updated an Account to Database");
 	}
 
-	
+	public void addZellUpdateDBdeposit(Account a) throws SQLException {
+		Connection con = ConnectionUtil.getConnection();
+		String sql = "UPDATE \"Banking\".accounts\r\n"
+				+ "SET zelldeposit =? "
+				+ "WHERE accountnumber=?;";
+		PreparedStatement myStmt = con.prepareStatement(sql);
+		
+		myStmt.setDouble(1, a.getZelldepoist());
+		myStmt.setInt(2, a.getAcctNum());
+		int res = myStmt.executeUpdate();
+		 System.out.println(res + " account record updated");
+		 log.info("Program updated an Account to Database");
+	}
+
 }
 
 

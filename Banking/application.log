@@ -35,3 +35,10 @@
 03-03-2021 12:15:22 {WARN} [com.revature.exceptions.UserNotFoundException] - Program tried to find a User but Username was not found in Database
 03-03-2021 13:18:31 {INFO} [com.revature.services.UserService] - Program found user in Database
 03-03-2021 13:18:57 {INFO} [com.revature.ui.MainMenu] - User made the choice of 2and logged into the User Menu
+03-03-2021 21:59:00 {WARN} [com.revature.ui.MainMenu] - User made the choice of 4and failed to log in
+03-03-2021 22:00:04 {INFO} [com.revature.ui.MainMenu] - User made the choice of 4and logged into the Employee Menu
+03-04-2021 01:16:53 {INFO} [com.revature.ui.MainMenu] - User made the choice of 2and logged into the User Menu
+03-04-2021 01:33:33 {INFO} [com.revature.services.UserService] - Program found user in Database
+03-04-2021 01:42:24 {INFO} [com.revature.services.UserService] - Program found user in Database
+03-04-2021 01:43:38 {INFO} [com.revature.services.UserService] - Program found user in Database
+03-04-2021 01:43:52 {INFO} [com.revature.ui.MainMenu] - User made the choice of 2and logged into the User Menu

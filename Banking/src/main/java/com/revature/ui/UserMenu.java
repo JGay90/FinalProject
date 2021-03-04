@@ -73,7 +73,8 @@ public class UserMenu implements Menu {
 					break;
 			
 				case 4:
-					System.out.println("Zell Menu Here");
+					//Menu zell = new ZellMenu();
+					//zell.display();
 					break;
 					//logic here to pull up accounts.
 				case 5:
@@ -149,12 +150,7 @@ public void printAcctBals() {
 	System.out.println(a.getAcctNum() +" Your balance is : "+ a.getAcctBal());
 }
 
-@Override
-public void display(String un) throws SQLException {
-	// TODO Auto-generated method stub
-	
-} 
-public void selectTransHistory() {
+	public void selectTransHistory() {
 	try {
 		accts = udao.getAcctByUser(un);
 		user.setAccounts(accts);
@@ -275,7 +271,7 @@ public void selectTransHistory() {
 		}
 	log.info("User made the choice of " + choice + "and made a deposit");
 }
-public void selectCheckAccounts() {
+	public void selectCheckAccounts() {
 	try {
 		User user = userService.getUserByUsername(un);
 		accts = udao.getAcctByUserwithBalance(un);
@@ -292,7 +288,7 @@ public void selectCheckAccounts() {
 	
 }
 
-public void selectWithdrawls() throws SQLException {
+	public void selectWithdrawls() throws SQLException {
 	accts = udao.getAcctByUser(un);
 	user.setAccounts(accts);
 	
@@ -364,5 +360,6 @@ public void selectWithdrawls() throws SQLException {
 	log.info("User made the choice of " + choice + "and made a withdrawl");
 	
 }
+
 }
 
